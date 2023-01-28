@@ -1,0 +1,23 @@
+.languageBtn {
+    padding: 5px 5px;
+    width: 50px;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+}
+.languageBtn:active {
+    transform: translate(1px, 1px);
+    box-shadow: inset 2px 2px 2px black;
+}
+
+.languageBtn:disabled{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: none;
+    box-shadow: none;
+    cursor: auto;
+}
