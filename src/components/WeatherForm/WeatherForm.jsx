@@ -4,6 +4,7 @@ import { Formik, useFormik } from 'formik';
 import { weatherFormSchemaEnglish, weatherFormSchemaUkraine } from './weatherFormSchema';
 import { WeatherContext } from '../../Context';
 import Error from '../Error/Error';
+import { WeatherApi } from '../../api';
 
 const WeatherForm = () => {
     const data = useContext(WeatherContext);
@@ -12,6 +13,18 @@ const WeatherForm = () => {
         initialValues: {city: ""},
         onSubmit: () => {
             const {city} = formik.values;
+            WeatherApi.getCityWeather(city)
+                .then((res)=> {
+                    data.setCurrentBackground(res)
+                    console.log(res.data)
+                    data.setCurrentWeather(res.data)
+                    data.setDescription(data.currentWeather.weather[0].description)
+                    })
+                    .catch(e => {
+                    data.setServerError(e.message)
+                    });
+            formik.resetForm();
+
         },
         handleChange: () => {
             isInputError && data.setShownError(true);
@@ -27,8 +40,6 @@ const WeatherForm = () => {
             <div className={styles.weatherFormBox}>
                 <Formik>
                     <form onSubmit={formik.handleSubmit}>
-                    {isInputError && <Error errorMessage={formik.errors.city}/>}
-                    {formik.status && <Error errorMessage={formik.status}/>}
                         <div>
                             <input
                                 className={styles.input}

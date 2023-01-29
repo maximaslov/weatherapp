@@ -1,5 +1,15 @@
 import  React, { useState, createContext } from 'react';
 const standartBackground = 'https://wallpaperaccess.com/full/1540005.jpg';
+const cloudsBackground = 'https://cs8.pikabu.ru/post_img/big/2017/07/02/9/1499010938150282077.jpg';
+const rainBackground = 'https://hips.hearstapps.com/hmg-prod/images/its-raining-heavily-wearing-an-umbrella-during-the-royalty-free-image-1660153348.jpg';
+const snowBackground = 'https://i2.wp.com/media.globalnews.ca/videostatic/news/kze2taggr4-jfc8p7qaxv/CP165276526.JPG?w=1040&quality=70&strip=all';
+const sunBackground = 'https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?cs=srgb&dl=pexels-pixabay-301599.jpg&fm=jpg';
+const thunderstormBackground = 'https://www.cdc.gov/nceh/features/lightning-safety/lightning-safety_456px.jpg?_=99662';
+const fogBackground = 'https://cff2.earth.com/uploads/2018/11/13053559/what-is-mist.jpg';
+const dustBackground = 'https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkxODQ4ODA4NzQ3OTAyNDUw/a-dust-storm-roars-across-a-drought-stricken-field.jpg';
+const ashBackground = 'https://cdn.hswstatic.com/gif/nanocrystals-1-original.jpg';
+const tornadoBackground = 'https://interesnyefakty.org/wp-content/uploads/chto-takoe-tornado.jpg';
+const squallBackground = 'https://i.pinimg.com/originals/a9/c5/30/a9c5302c7afd27f7ac3bb6c089024839.jpg';
 
 export const WeatherContext = createContext();
 
@@ -9,7 +19,39 @@ const Context = (props) => {
     const [shownResult, setShownResult] = useState(false);
     const [isEnglishLanguage, setEnglishLanguage] = useState(false);
     const [shownError, setShownError] = useState(false);
+    const [serverError, setServerError] = useState(false);
+    const [description, setDescription] = useState('');
+
+    const setCurrentBackground = (res) => {
+        switch (res.data.weather[0].main) {
+            case 'Clouds': setBackground(cloudsBackground);
+            break;
+            case 'Rain' || 'Drizzle': setBackground(rainBackground);
+            break;
+            case 'Snow': setBackground(snowBackground);
+            break;
+            case 'Clear': setBackground(sunBackground);
+            break;
+            case 'Thunderstorm': setBackground(thunderstormBackground);
+            break;
+            case 'Mist' || 'Smoke' || 'Haze': setBackground(fogBackground);
+            break;
+            case 'Sand' || 'Dust' || 'Haze': setBackground(dustBackground);
+            break;
+            case 'Ash' : setBackground(ashBackground);
+            break;
+            case 'Tornado' : setBackground(tornadoBackground);
+            break;
+            case 'Squall' : setBackground(squallBackground);
+            break;
+            default: setBackground(standartBackground)
+        }
+    }
+
     const value = {
+        standartBackground,
+        currentWeather,
+        setCurrentWeather,
         background,
         setBackground,
         shownResult,
@@ -18,6 +60,11 @@ const Context = (props) => {
         setEnglishLanguage,
         shownError,
         setShownError,
+        setCurrentBackground,
+        serverError,
+        setServerError,
+        description,
+        setDescription,
     }
     
 

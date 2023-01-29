@@ -2,21 +2,21 @@
     max-width: 900px;
     display: flex;
     justify-content: center;
-    color: rgba(255, 0, 0, 0.668);
+    color: white;
 }
 
 .error p {
     position: absolute;
     margin-top: -160px;
     animation: show 10s ease ;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 @keyframes show {
     0% {
         transform: translateX(0) translateY(0)
     }
-    10% {
+    5% {
         transform: translateX(0) translateY(45px)
     }
    25% {
@@ -37,8 +37,6 @@
     .error p {
         font-size: 15px;
         font-weight: 600;
-        color: red;
-        background-color: white;
         padding: 2px;
         text-align: center;
     }
