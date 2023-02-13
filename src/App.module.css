@@ -8,7 +8,6 @@
 }
 
 .appWrapper {
-  max-width: 1800px;
   width: 100%;
   position: relative;
   margin: 0 auto;
@@ -21,6 +20,7 @@
 }
 
 .appWrapperContent {
-  padding: 20px;
+  position: relative;
+  padding: 0 20px;
   width: 100%;
 }

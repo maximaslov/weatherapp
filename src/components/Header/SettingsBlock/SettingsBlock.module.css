@@ -1,0 +1,6 @@
+.settings {
+    display: flex;
+    max-width: 185px;
+    width: 100%;
+    justify-content: space-between;
+}

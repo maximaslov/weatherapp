@@ -7,7 +7,7 @@
 
 .error p {
     position: absolute;
-    margin-top: -160px;
+    margin-top: 0px;
     animation: show 10s ease ;
     font-size: 18px;
 }

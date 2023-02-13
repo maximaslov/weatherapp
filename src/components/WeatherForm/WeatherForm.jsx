@@ -21,7 +21,7 @@ const WeatherForm = () => {
                     data.setDescription(data.currentWeather.weather[0].description)
                     })
                     .catch(e => {
-                    data.setServerError(e.message)
+                    data.setServerError(e.response.data.message)
                     });
             formik.resetForm();
 

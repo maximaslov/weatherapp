@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styles from './languageSettings.module.css';
-import { WeatherContext } from '../../../Context';
+import { WeatherContext } from '../../../../Context';
 import LanguageButton from './LanguageButton/LanguageButton';
 
 const LanguageSettings = () => {
