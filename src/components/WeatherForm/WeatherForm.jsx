@@ -56,13 +56,13 @@ const WeatherForm = () => {
                             type={'submit'}>
                                 {data.isEnglishLanguage ?  'Show weather' : 'Показати погоду'}
                         </button>
-                        <p className={styles.separator}>{data.isEnglishLanguage ? "or" : "або"}</p>
+                        {/* <p className={styles.separator}>{data.isEnglishLanguage ? "or" : "або"}</p> */}
                         
                     </form>
                 </Formik>
-                <button className={styles.weatherBtn}>
+                {/* <button className={styles.weatherBtn}>
                     {data.isEnglishLanguage ?  'Determine location' : 'Визначити місцезнаходження'}
-                </button>
+                </button> */}
             </div>
         </div>
         

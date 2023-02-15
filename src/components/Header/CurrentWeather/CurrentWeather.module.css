@@ -1,6 +1,6 @@
 .currentWeather {
     display: flex;
     justify-content: space-between;
-    max-width: 700px;
+    max-width: 760px;
     width: 100%;
 }

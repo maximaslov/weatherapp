@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <SettingsBlock/>
-            <div>LOGO</div>
+            <div className={styles.logo}>LOGO</div>
             <CurrentWeather />
         </header>
     )

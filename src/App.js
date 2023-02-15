@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import { WeatherApi } from './api';
 import Header from './components/Header/Header';
 import Error from './components/Error/Error';
-
 const App = () => {
   const data = useContext(WeatherContext);
 
@@ -21,7 +20,7 @@ const App = () => {
           data.setDescription(data.currentWeather.weather[0].description)
         })
         .catch(e => {
-          data.setServerError(e.response.data.message);
+          data.setServerError(e.response?.data.message);
         });
     });
     

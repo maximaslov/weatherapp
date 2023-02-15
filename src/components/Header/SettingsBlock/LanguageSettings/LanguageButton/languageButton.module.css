@@ -7,7 +7,9 @@
     border-radius: 5px;
     background: none;
     cursor: pointer;
+    height: 30px;
 }
+
 .languageBtn:active {
     transform: translate(1px, 1px);
     box-shadow: inset 2px 2px 2px black;

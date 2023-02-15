@@ -1,4 +1,13 @@
 import  React, { useState, createContext } from 'react';
+import rainIcon from './img/rain.png';
+import brokenCloudsIcon from './img/broken-clouds.png';
+import clearSkyIcon from './img/clear-sky.png';
+import fewCloudsIcon from './img/few-clouds.png';
+import mistsIcon from './img/mist.png';
+import snowIcon from './img/snow.png';
+import thunderstormIcon from './img/thunderstorm.png';
+import tornadoIcon from './img/tornado.png';
+
 const standartBackground = 'https://wallpaperaccess.com/full/1540005.jpg';
 const cloudsBackground = 'https://cs8.pikabu.ru/post_img/big/2017/07/02/9/1499010938150282077.jpg';
 const rainBackground = 'https://hips.hearstapps.com/hmg-prod/images/its-raining-heavily-wearing-an-umbrella-during-the-royalty-free-image-1660153348.jpg';
@@ -19,8 +28,12 @@ const Context = (props) => {
     const [shownResult, setShownResult] = useState(false);
     const [isEnglishLanguage, setEnglishLanguage] = useState(false);
     const [shownError, setShownError] = useState(false);
-    const [serverError, setServerError] = useState(false);
+    const [serverError, setServerError] = useState('');
     const [description, setDescription] = useState('');
+    const [currentScale, setCurrrentScale] = useState('metric');
+    const [showLoader, setShowLoader] = useState(false);
+
+    const lang = isEnglishLanguage ? 'en' : 'ua';
 
     const setCurrentBackground = (res) => {
         switch (res.data.weather[0].main) {
@@ -48,6 +61,22 @@ const Context = (props) => {
         }
     }
 
+    const setWeatherIcon = (res) => {
+        switch (res.data.weather[0].main) {
+            case 'Clouds': return brokenCloudsIcon;
+            case 'Rain`' || 'Drizzle': return rainIcon;
+            case 'Snow': return snowIcon;
+            case 'Clear': return clearSkyIcon;
+            case 'Thunderstorm': return thunderstormIcon;
+            case 'Mist' || 'Smoke' || 'Haze': return mistsIcon;
+            case 'Sand' || 'Dust' : return mistsIcon;
+            case 'Ash' : return mistsIcon;
+            case 'Tornado' : return tornadoIcon;
+            case 'Squall' : return fewCloudsIcon;
+            default: return mistsIcon;
+        }
+    }
+
     const value = {
         standartBackground,
         currentWeather,
@@ -65,6 +94,12 @@ const Context = (props) => {
         setServerError,
         description,
         setDescription,
+        setWeatherIcon,
+        currentScale,
+        setCurrrentScale,
+        lang,
+        showLoader,
+        setShowLoader
     }
     
 

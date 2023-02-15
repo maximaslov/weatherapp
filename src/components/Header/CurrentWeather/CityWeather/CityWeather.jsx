@@ -7,26 +7,44 @@ import { WeatherContext } from '../../../../Context';
 
 const CityWeather = ({city}) => {
     const data = useContext(WeatherContext);
+    const scale = data.currentScale === 'metric' ? 'C' : 'F';
     const [currentWeather, setCurrentWeather] = useState(null);
+    const [currentWeatherIcon, setCurrentWeatherIcon] = useState('');
 
     const getCurrentWeather = () => {
-        WeatherApi.getCityWeather(city).then((res) => setCurrentWeather(res.data))
+        data.setShowLoader(true)
+        WeatherApi.getCityWeather(city, data.lang, data.currentScale)
+            .then((res) => {
+                setCurrentWeather(res.data)
+                setCurrentWeatherIcon(data.setWeatherIcon(res));
+            })
+            .then(() => data.setShowLoader(false))
          .catch(e => { 
-            data.setServerError(e.response.data.message);
+            console.log(e)
+            data.setServerError(e.response?.data.message);
         });
     }
 
-    useEffect(() => {
+    useEffect(() => { 
         getCurrentWeather();
-    },[])
+    },[data.isEnglishLanguage, data.currentScale]);
 
     return  (
         <>
-            {!currentWeather ? <Loader/> : 
+            {!currentWeather || data.showLoader ? <Loader/> : 
                 <div className={styles.cityWeather}>
-                    <p>{currentWeather.name}</p>
-                    <p>{currentWeather.main.temp}</p>
-                    <p>{currentWeather.weather[0].description}</p>
+                    <div className={styles.firstDescription}>
+                        <p className={styles.cityName}>{currentWeather.name}</p>
+                        <p className={styles.temperature}>{currentWeather.main.temp > 0
+                            ? `+${Math.round(currentWeather.main.temp)} °${scale}` 
+                            : `${Math.round(currentWeather.main.temp)} °${scale}`}</p>
+                    </div>
+                    <div className={styles.secondDescription}>
+                        <figure>
+                            <img src={currentWeatherIcon} alt="weather" />
+                        </figure>
+                        <p className={styles.descriptionText}>{currentWeather.weather[0].description}</p>
+                    </div>
                 </div>
             }
         </>

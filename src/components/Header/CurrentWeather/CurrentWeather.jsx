@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from './CurrentWeather.module.css';
 import CityWeather from './CityWeather/CityWeather'
+import { WeatherContext } from '../../../Context';
 
+
+
+    
 const CurrentWeather = () => {
+    const data = useContext(WeatherContext);
     return  (
-        
         <div className={styles.currentWeather}>
-            <CityWeather city={'Paris'}/>
-            <CityWeather city={'Kiev'}/>
-            <CityWeather city={'London'}/>
-            <CityWeather city={'New York'}/>
+            <CityWeather city={data.isEnglishLanguage ? 'Paris' : "Париж"}/>
+            <CityWeather city={data.isEnglishLanguage ? 'Kiev' : "Київ"}/>
+            <CityWeather city={data.isEnglishLanguage ? 'London' : "Лондон"}/>
+            <CityWeather city={data.isEnglishLanguage ? 'New York' : "Ню Йорк"}/>
         </div>
     )
 }

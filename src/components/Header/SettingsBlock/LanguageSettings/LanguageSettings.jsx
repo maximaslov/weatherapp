@@ -15,7 +15,7 @@ const LanguageSettings = () => {
     }
 
     return (
-        <div className={styles.languageSettingsContainer}>
+        <nav className={styles.languageSettingsContainer}>
             <LanguageButton 
                 language={!data.isEnglishLanguage && 'ENG'}
                 onClick={onEngBtnClick}
@@ -28,7 +28,7 @@ const LanguageSettings = () => {
                 isDisabled={!data.isEnglishLanguage && true}
                 btnStyle={styles.ukrainianBtn}
             />
-        </div>
+        </nav>
     )
 }
 
