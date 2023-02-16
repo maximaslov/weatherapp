@@ -7,6 +7,7 @@ import mistsIcon from './img/mist.png';
 import snowIcon from './img/snow.png';
 import thunderstormIcon from './img/thunderstorm.png';
 import tornadoIcon from './img/tornado.png';
+import { WeatherApi } from './api';
 
 const standartBackground = 'https://wallpaperaccess.com/full/1540005.jpg';
 const cloudsBackground = 'https://cs8.pikabu.ru/post_img/big/2017/07/02/9/1499010938150282077.jpg';
@@ -32,8 +33,10 @@ const Context = (props) => {
     const [description, setDescription] = useState('');
     const [currentScale, setCurrrentScale] = useState('metric');
     const [showLoader, setShowLoader] = useState(false);
+    const [weatherCards, setWeatherCards] = useState ([]);
 
     const lang = isEnglishLanguage ? 'en' : 'ua';
+    const scale = currentScale === 'metric' ? 'C' : 'F';
 
     const setCurrentBackground = (res) => {
         switch (res.data.weather[0].main) {
@@ -77,6 +80,23 @@ const Context = (props) => {
         }
     }
 
+    const getWeatherByLocation = () => {
+        setShowLoader(true);
+        navigator.geolocation.getCurrentPosition(function(position) {
+            WeatherApi.getLocationWeather(position.coords, lang, currentScale)
+              .then((res)=> {
+                setCurrentBackground(res)
+                setCurrentWeather(res.data)
+                setWeatherCards([...weatherCards, res.data]);
+                setDescription(currentWeather.weather[0].description)
+              })
+              .then(() => setShowLoader(false))
+              .catch(e => {
+                setServerError(e.response?.data.message);
+              });
+          });
+    }
+    
     const value = {
         standartBackground,
         currentWeather,
@@ -99,7 +119,11 @@ const Context = (props) => {
         setCurrrentScale,
         lang,
         showLoader,
-        setShowLoader
+        setShowLoader,
+        getWeatherByLocation,
+        scale,
+        setWeatherCards,
+        weatherCards,
     }
     
 

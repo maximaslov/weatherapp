@@ -4,7 +4,7 @@ import styles from './Loader.module.css';
 
 const Loader = () => {
     return (
-        <figure>
+        <figure className={styles.loaderContainer}>
             <img className={styles.loader} src={loadingGif} alt="loading..." />
         </figure>
     )

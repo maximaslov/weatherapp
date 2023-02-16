@@ -3,7 +3,6 @@ import styles from './WeatherForm.module.css';
 import { Formik, useFormik } from 'formik';
 import { weatherFormSchemaEnglish, weatherFormSchemaUkraine } from './weatherFormSchema';
 import { WeatherContext } from '../../Context';
-import Error from '../Error/Error';
 import { WeatherApi } from '../../api';
 
 const WeatherForm = () => {
@@ -13,15 +12,14 @@ const WeatherForm = () => {
         initialValues: {city: ""},
         onSubmit: () => {
             const {city} = formik.values;
-            WeatherApi.getCityWeather(city)
+            WeatherApi.getCityWeather(city, data.lang, data.currentScale)
                 .then((res)=> {
                     data.setCurrentBackground(res)
-                    console.log(res.data)
-                    data.setCurrentWeather(res.data)
                     data.setDescription(data.currentWeather.weather[0].description)
+                    data.setWeatherCards([...data.weatherCards, res.data])
                     })
                     .catch(e => {
-                    data.setServerError(e.response.data.message)
+                    data.setServerError(e.response?.data.message)
                     });
             formik.resetForm();
 
@@ -39,7 +37,7 @@ const WeatherForm = () => {
         <div className={styles.weatherFormContaner}>
             <div className={styles.weatherFormBox}>
                 <Formik>
-                    <form onSubmit={formik.handleSubmit}>
+                    <form className={styles.weatherForm} onSubmit={formik.handleSubmit}>
                         <div>
                             <input
                                 className={styles.input}
