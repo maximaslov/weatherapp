@@ -5,13 +5,16 @@ import LanguageButton from './LanguageButton/LanguageButton';
 
 const LanguageSettings = () => {
     const data = useContext(WeatherContext);
+    
 
     const onEngBtnClick = () => {
         data.setEnglishLanguage(true)
+        data.languageStorage.setItem('lang', 'en')
     }
 
     const onUaBtnClick = () => {
         data.setEnglishLanguage(false)
+        data.languageStorage.setItem('lang', 'uk')
     }
 
     return (

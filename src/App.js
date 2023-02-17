@@ -9,12 +9,13 @@ import Header from './components/Header/Header';
 import Error from './components/Error/Error';
 import WeatherCardsBlock from './components/WeatherCardsBlock/WeatherCardsBlock';
 import Loader from './components/Loader/Loader';
+import AddNewCardButton from './components/AddNewCardButton/AddNewCardButton';
 
 const App = () => {
   const data = useContext(WeatherContext);
 
   useEffect(()=> {
-    data.getWeatherByLocation();
+    // data.getWeatherByLocation();
   }, []);
 
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Header />
             <main>
               {data.serverError && <Error errorMessage={data.serverError}/>}
+              <AddNewCardButton />
               <WeatherForm />
               <WeatherCardsBlock />
               {data.shownResult && <Result />}

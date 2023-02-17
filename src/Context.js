@@ -24,19 +24,29 @@ const squallBackground = 'https://i.pinimg.com/originals/a9/c5/30/a9c5302c7afd27
 export const WeatherContext = createContext();
 
 const Context = (props) => {
+
+    const languageStorage = window.localStorage;
+    const scaleStorage = window.localStorage;
+    const [showForm, setShowForm] = useState(false);
     const [currentWeather, setCurrentWeather] = useState(null);
     const [background, setBackground] = useState(standartBackground);
     const [shownResult, setShownResult] = useState(false);
-    const [isEnglishLanguage, setEnglishLanguage] = useState(false);
+    const [isEnglishLanguage, setEnglishLanguage] = useState(
+        languageStorage.getItem('lang') === 'uk' ? false : true
+    );
     const [shownError, setShownError] = useState(false);
     const [serverError, setServerError] = useState('');
     const [description, setDescription] = useState('');
-    const [currentScale, setCurrrentScale] = useState('metric');
+    const [currentScale, setCurrrentScale] = useState(
+        scaleStorage.getItem('scale') ? scaleStorage.getItem('scale') : 'metric'
+        );
     const [showLoader, setShowLoader] = useState(false);
-    const [weatherCards, setWeatherCards] = useState ([]);
+    const [weatherCards, setWeatherCards] = useState([]);
+    const [showAddButton, setShowAddButton] = useState(true);
 
     const lang = isEnglishLanguage ? 'en' : 'ua';
     const scale = currentScale === 'metric' ? 'C' : 'F';
+    
 
     const setCurrentBackground = (res) => {
         switch (res.data.weather[0].main) {
@@ -124,6 +134,12 @@ const Context = (props) => {
         scale,
         setWeatherCards,
         weatherCards,
+        languageStorage,
+        scaleStorage,
+        showForm,
+        setShowForm,
+        setShowAddButton,
+        showAddButton
     }
     
 
