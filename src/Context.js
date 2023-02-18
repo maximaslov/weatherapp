@@ -1,4 +1,5 @@
 import  React, { useState, createContext } from 'react';
+import standartBackground from '../src/img/background.jpg'
 import rainIcon from './img/rain.png';
 import brokenCloudsIcon from './img/broken-clouds.png';
 import clearSkyIcon from './img/clear-sky.png';
@@ -9,7 +10,7 @@ import thunderstormIcon from './img/thunderstorm.png';
 import tornadoIcon from './img/tornado.png';
 import { WeatherApi } from './api';
 
-const standartBackground = 'https://wallpaperaccess.com/full/1540005.jpg';
+// const standartBackground = 'https://wallpaperaccess.com/full/1540005.jpg';
 const cloudsBackground = 'https://cs8.pikabu.ru/post_img/big/2017/07/02/9/1499010938150282077.jpg';
 const rainBackground = 'https://hips.hearstapps.com/hmg-prod/images/its-raining-heavily-wearing-an-umbrella-during-the-royalty-free-image-1660153348.jpg';
 const snowBackground = 'https://i2.wp.com/media.globalnews.ca/videostatic/news/kze2taggr4-jfc8p7qaxv/CP165276526.JPG?w=1040&quality=70&strip=all';
@@ -24,7 +25,6 @@ const squallBackground = 'https://i.pinimg.com/originals/a9/c5/30/a9c5302c7afd27
 export const WeatherContext = createContext();
 
 const Context = (props) => {
-
     const languageStorage = window.localStorage;
     const scaleStorage = window.localStorage;
     const [showForm, setShowForm] = useState(false);
@@ -46,6 +46,9 @@ const Context = (props) => {
 
     const lang = isEnglishLanguage ? 'en' : 'ua';
     const scale = currentScale === 'metric' ? 'C' : 'F';
+
+    const cardsArray = ['Paris', 'Kyiv'];
+    const [cards, setCards] = useState(cardsArray) ;
     
 
     const setCurrentBackground = (res) => {
@@ -139,7 +142,10 @@ const Context = (props) => {
         showForm,
         setShowForm,
         setShowAddButton,
-        showAddButton
+        showAddButton,
+        cards,
+        setCards,
+        cardsArray
     }
     
 

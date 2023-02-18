@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './WeatherForm.module.css';
 import { Formik, useFormik } from 'formik';
 import { weatherFormSchemaEnglish, weatherFormSchemaUkraine } from './weatherFormSchema';
@@ -12,15 +12,19 @@ const WeatherForm = () => {
         initialValues: {city: ""},
         onSubmit: () => {
             const {city} = formik.values;
-            WeatherApi.getCityWeather(city, data.lang, data.currentScale)
+            WeatherApi.getCityWeather(city)
                 .then((res)=> {
-                    data.setCurrentBackground(res)
-                    data.setDescription(data.currentWeather.weather[0].description)
-                    data.setWeatherCards([...data.weatherCards, res.data])
-                    })
-                    .catch(e => {
-                    data.setServerError(e.response?.data.message)
-                    });
+                    if(res.statusText === 'OK') {
+                        const newCardsArray = [...data.cards, city]
+                        data.setCards(newCardsArray);
+                        data.setShowForm(false);
+                        data.setShowAddButton(true);
+                    }
+                })
+                .catch(e => {
+                data.setServerError(e.response?.data.message)
+                });
+            
             formik.resetForm();
 
         },

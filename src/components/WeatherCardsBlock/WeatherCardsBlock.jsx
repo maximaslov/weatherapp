@@ -1,15 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { WeatherContext } from '../../Context';
 import WeatherCard from './WeatherCard/WeatherCard';
+import styles from './WeatherCardsBlock.module.css';
 
 const WeatherCardsBlock = () => {
     const data = useContext(WeatherContext);
 
     return (
-        <div>
+        <div className={styles.weatherCardContainer}>
             {/* <WeatherCard /> */}
-            {data.weatherCards && data.weatherCards.map(e => {
-                return <WeatherCard key={e.id} name={e.name} temp={e.main.temp} description={e.weather[0].description} />
+            {data.cards && data.cards.map((e, i) => {
+                return <WeatherCard key={i} city={e} lang={data.lang} scale={data.currentScale} />
             })}
         </div>
     )
