@@ -9,6 +9,13 @@ const WeatherCard = ({city, lang, scale}) => {
   const [currentWeather, setCurrentWeather] = useState (null);
   const [currentWeatherIcon, setCurrentWeatherIcon] = useState(null);
 
+  const removeCard = () => {
+    const items = JSON.parse(data.cardsStorage.getItem('storageCardsArray'));
+    const newItems  =  items.filter(e => e !== city);
+    data.cardsStorage.setItem('storageCardsArray', JSON.stringify(newItems));
+    data.setCards(JSON.parse(data.cardsStorage.getItem('storageCardsArray')));
+  }
+
   const getCurrentWeather = () => {
     data.setShowLoader(true)
     WeatherApi.getCityWeather(city, lang, scale)
@@ -25,7 +32,11 @@ const WeatherCard = ({city, lang, scale}) => {
 
   useEffect(() => {
     getCurrentWeather()
-  }, [scale, lang]);
+    const newStorageArr = JSON.stringify(data.cards);
+    data.cardsStorage.setItem('storageCardsArray', newStorageArr);
+    console.log(data.cardsStorage.getItem('storageCardsArray'))
+    // data.cardsStorage.clear();
+  }, [scale, lang, data.card, data.cardsData]);
 
   return (
     <>
@@ -44,6 +55,7 @@ const WeatherCard = ({city, lang, scale}) => {
             </p>
             <img src={currentWeatherIcon} alt="" />
             <p>{currentWeather.weather[0].description}</p>
+            <button onClick={removeCard}>remove</button>
           </div>
         )}
       </div>
