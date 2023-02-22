@@ -9,6 +9,7 @@ import Error from "./components/Error/Error";
 import WeatherCardsBlock from "./components/WeatherCardsBlock/WeatherCardsBlock";
 import Loader from "./components/Loader/Loader";
 import AddNewCardButton from "./components/AddNewCardButton/AddNewCardButton";
+import { WeatherApi } from "./api";
 
 const App = () => {
   const data = useContext(WeatherContext);
@@ -16,11 +17,10 @@ const App = () => {
   useEffect(() => {
     // data.getWeatherByLocation();
   }, []);
-  
 
   return (
-     
-      <div className={styles.appWrapper}>
+     <div 
+        className={styles.appWrapper}>
         <img className={styles.backgroundImage} src={data.background} alt="" />
         <div className={styles.appWrapperContent}>
           <Header />
@@ -28,7 +28,8 @@ const App = () => {
             {data.serverError && <Error errorMessage={data.serverError} />}
             <WeatherCardsBlock />
             <AddNewCardButton />
-            <WeatherForm />
+            <WeatherForm 
+            onClick={e => e.stopPropagation()}/>
             {data.shownResult && <Result />}
           </main>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import styles from './WeatherForm.module.css';
 import { Formik, useFormik } from 'formik';
 import { weatherFormSchemaEnglish, weatherFormSchemaUkraine } from './weatherFormSchema';
@@ -7,6 +7,26 @@ import { WeatherApi } from '../../api';
 
 const WeatherForm = () => {
     const data = useContext(WeatherContext);
+    const onClose = () => {
+        data.setShowForm(false);
+        data.setShowAddButton(true);
+    }
+
+    const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [modalRef, onClose]);
 
     const formik = useFormik({
         initialValues: {city: ""},
@@ -15,7 +35,12 @@ const WeatherForm = () => {
             WeatherApi.getCityWeather(city)
                 .then((res)=> {
                     if(res.statusText === 'OK') {
-                        const newCardsArray = [...data.cards, city]
+                        const newCradInfo = {   
+                            name: city, 
+                            id: Math.random(),
+                        }
+                        // const newCardsArray = [...data.cards, city]
+                        const newCardsArray = [...data.cards, newCradInfo]
                         data.setCards(newCardsArray);
                         data.setShowForm(false);
                         data.setShowAddButton(true);
@@ -38,13 +63,17 @@ const WeatherForm = () => {
     const isInputError = formik.errors.city|| formik.touched.city;
 
     return (
-        <div className={styles.weatherFormContaner}>
+        <div 
+        ref={modalRef}
+        className={data.showForm ? styles.weatherFormContaner : null}
+        >
             {data.showForm &&
             <div className={styles.weatherFormBox}>
                 <Formik>
                     <form className={styles.weatherForm} onSubmit={formik.handleSubmit}>
                         <div>
                             <input
+                                autoFocus = {true}
                                 className={styles.input}
                                 value={formik.values.city}
                                 type='text'

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { WeatherContext } from '../../Context';
+import Loader from "../Loader/Loader";
 import WeatherCard from './WeatherCard/WeatherCard';
 import styles from './WeatherCardsBlock.module.css';
 
@@ -8,10 +9,11 @@ const WeatherCardsBlock = () => {
 
     return (
         <div className={styles.weatherCardContainer}>
-            {/* <WeatherCard /> */}
-            {data.cards && data.cards.map((e, i) => {
-                return <WeatherCard key={i} city={e} lang={data.lang} scale={data.currentScale} />
-            })}
+            {
+            data.cards && data.cards.map((e) => {
+                return <WeatherCard key={e.id} id={e.id} city={e.name} lang={data.lang} scale={data.currentScale} />
+            })
+            }
         </div>
     )
 }

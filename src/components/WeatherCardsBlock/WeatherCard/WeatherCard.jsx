@@ -4,16 +4,21 @@ import { WeatherContext } from '../../../Context';
 import Loader from '../../Loader/Loader';
 import styles from "./WeatherCard.module.css";
 
-const WeatherCard = ({city, lang, scale}) => {
+const WeatherCard = ({city, lang, scale, id}) => {
   const data = useContext(WeatherContext);
   const [currentWeather, setCurrentWeather] = useState (null);
   const [currentWeatherIcon, setCurrentWeatherIcon] = useState(null);
+  const [showThisCard, setShowThisCard] = useState(true);
 
-  const removeCard = () => {
+  const removeCard = (e) => {
     const items = JSON.parse(data.cardsStorage.getItem('storageCardsArray'));
-    const newItems  =  items.filter(e => e !== city);
-    data.cardsStorage.setItem('storageCardsArray', JSON.stringify(newItems));
-    data.setCards(JSON.parse(data.cardsStorage.getItem('storageCardsArray')));
+    const newItems  =  items.filter(e => e.id !== id);
+    setShowThisCard(false);
+    setTimeout(() => {
+      data.cardsStorage.setItem('storageCardsArray', JSON.stringify(newItems));
+      data.setCards(JSON.parse(data.cardsStorage.getItem('storageCardsArray')));
+    }, 700);
+
   }
 
   const getCurrentWeather = () => {
@@ -24,7 +29,10 @@ const WeatherCard = ({city, lang, scale}) => {
             setCurrentWeatherIcon(data.setWeatherIcon(res));
             
         })
-        .then(() => data.setShowLoader(false))
+        .then(() => {
+          data.setShowLoader(false)
+          data.cardsCount += 1;
+        })
      .catch(e => { 
         data.setServerError(e.response?.data.message);
     });
@@ -40,22 +48,29 @@ const WeatherCard = ({city, lang, scale}) => {
 
   return (
     <>
-      <div className={styles.weatherCardContainer}>
+      <div className={showThisCard ? styles.weatherCardContainer : styles.remove}>
         {!currentWeather || data.showLoader ? (
           <Loader />
         ) : (
           
-          <div className={styles.weatherCard}>
+          <div className={
+          //   currentWeather.weather[0].main === 'Rain`' 
+          // || currentWeather.weather[0].main === 'Drizzle' ? 
+          styles.weatherCardRain 
+          // : 
+          // styles.weatherCard
+        }
+          >
              
             <p>{currentWeather.name}</p>
             <p>
-              {currentWeather.main.temp < 0
+              {currentWeather.main.temp > 0
                 ? `+${Math.round(currentWeather.main.temp)} °${data.scale}`
                 : `${Math.round(currentWeather.main.temp)} °${data.scale}`}
             </p>
             <img src={currentWeatherIcon} alt="" />
             <p>{currentWeather.weather[0].description}</p>
-            <button onClick={removeCard}>remove</button>
+            <button className={styles.removeBtn} onClick={removeCard}>remove</button>
           </div>
         )}
       </div>

@@ -32,8 +32,11 @@ const CityWeather = ({city}) => {
         <>
            
                 <div className={styles.cityWeather}>
-                {!currentWeather || data.showLoader 
-                    ? <Loader/> 
+                {
+                !currentWeather || 
+                data.showLoader 
+                    ? 
+                    <Loader/> 
                     :   <>
                             <div className={styles.firstDescription}>
                                 <p className={styles.cityName}>{currentWeather.name}</p>

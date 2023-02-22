@@ -28,6 +28,7 @@ const Context = (props) => {
     const languageStorage = window.localStorage;
     const scaleStorage = window.localStorage;
     const cardsStorage = window.localStorage;
+    const allWeathers = [];
     const [showForm, setShowForm] = useState(false);
     const [currentWeather, setCurrentWeather] = useState(null);
     const [background, setBackground] = useState(standartBackground);
@@ -41,17 +42,18 @@ const Context = (props) => {
     const [currentScale, setCurrrentScale] = useState(
         scaleStorage.getItem('scale') ? scaleStorage.getItem('scale') : 'metric'
         );
-    const [showLoader, setShowLoader] = useState(false);
+    const [showLoader, setShowLoader] = useState(true);
     const [weatherCards, setWeatherCards] = useState([]);
     const [showAddButton, setShowAddButton] = useState(true);
 
     const lang = isEnglishLanguage ? 'en' : 'ua';
     const scale = currentScale === 'metric' ? 'C' : 'F';
 
-    // const cardsArray = ['Paris', 'Kyiv'];
     const cardsData = cardsStorage.getItem('storageCardsArray');
     const cardsArray = cardsData ? JSON.parse(cardsData) : [];
     const [cards, setCards] = useState(cardsArray);
+
+    let cardsCount = 0;
     
 
     const setCurrentBackground = (res) => {
@@ -150,7 +152,9 @@ const Context = (props) => {
         setCards,
         cardsData,
         cardsArray,
-        cardsStorage
+        cardsStorage,
+        cardsCount,
+        allWeathers,
     }
     
 

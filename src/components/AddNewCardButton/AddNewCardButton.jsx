@@ -7,11 +7,10 @@ const AddNewCardButton = () => {
   const onBtnClick = () => {
     data.setShowForm(true);
     data.setShowAddButton(false);
-
   };
 
   return (
-    <div className={data.showAddButton ? styles.newCardBtnContainer : styles.heddenNewCardBtnContainer}>
+    <div className={data.showAddButton ? styles.newCardBtnContainer : styles.hiddenNewCardBtnContainer}>
         <button onClick={onBtnClick} className={styles.newCardBtn}>
             <p>+</p>
         </button>

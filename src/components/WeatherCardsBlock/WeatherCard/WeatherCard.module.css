@@ -7,6 +7,91 @@
     display: flex;
     align-items: center;
     position: relative;
-    z-index: 9999;
+    z-index: 10;
+    transition: transform 0.25s ease;
+    animation: show 0.7s ease;
 }
+
+.remove {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.25s ease;
+    animation: hide 0.7s ease;
+}
+
+.weatherCardRain {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.25s ease;
+    animation: show 0.7s ease;
+}
+
+.weatherCardContainer::before {
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../img/rainanimation.gif');
+    /* Задаем анимацию дождя */
+    animation: rain 1s linear infinite;
+    /* Задаем z-index, чтобы псевдоэлемент был поверх других дочерних элементов */
+    z-index: 11 ;
+  }
+
+  .removeBtn {
+    position: relative;
+    z-index: 12;
+  }
+  
+  @keyframes rain {
+    0% {
+      background-position: 0px 0px;
+    }
+    100% {
+      background-position: 0px 50px;
+    }
+  }
+
+
+@keyframes hide {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes show {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
 
