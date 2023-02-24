@@ -1,6 +1,6 @@
 import  React, { useState, createContext } from 'react';
 import standartBackground from '../src/img/background.jpg'
-import rainIcon from './img/rain.png';
+import rainIcon from './img/shower-rain.png';
 import brokenCloudsIcon from './img/broken-clouds.png';
 import clearSkyIcon from './img/clear-sky.png';
 import fewCloudsIcon from './img/few-clouds.png';
@@ -52,8 +52,6 @@ const Context = (props) => {
     const cardsData = cardsStorage.getItem('storageCardsArray');
     const cardsArray = cardsData ? JSON.parse(cardsData) : [];
     const [cards, setCards] = useState(cardsArray);
-
-    let cardsCount = 0;
     
 
     const setCurrentBackground = (res) => {
@@ -84,8 +82,8 @@ const Context = (props) => {
 
     const setWeatherIcon = (res) => {
         switch (res.data.weather[0].main) {
-            case 'Clouds': return brokenCloudsIcon;
-            case 'Rain`' || 'Drizzle': return rainIcon;
+           case 'Clouds': return brokenCloudsIcon;
+            case 'Rain' || 'Drizzle': return rainIcon;
             case 'Snow': return snowIcon;
             case 'Clear': return clearSkyIcon;
             case 'Thunderstorm': return thunderstormIcon;
@@ -94,9 +92,25 @@ const Context = (props) => {
             case 'Ash' : return mistsIcon;
             case 'Tornado' : return tornadoIcon;
             case 'Squall' : return fewCloudsIcon;
-            default: return mistsIcon;
+            default: return mistsIcon; 
         }
     }
+
+    const setCurrentClass = (res) => {
+        switch (res.data.weather[0].main) {
+            // case 'Clouds': return brokenCloudsIcon;
+            case 'Rain' || 'Drizzle': return 'rainContainer';
+            case 'Snow': return 'snowContainer';
+            // case 'Clear': return clearSkyIcon;
+            // case 'Thunderstorm': return thunderstormIcon;
+            // case 'Mist' || 'Smoke' || 'Haze': return mistsIcon;
+            // case 'Sand' || 'Dust' : return mistsIcon;
+            // case 'Ash' : return mistsIcon;
+            // case 'Tornado' : return tornadoIcon;
+            // case 'Squall' : return fewCloudsIcon;
+            default: return 'weatherCardContainer'; 
+         }
+      }
 
     const getWeatherByLocation = () => {
         setShowLoader(true);
@@ -153,8 +167,8 @@ const Context = (props) => {
         cardsData,
         cardsArray,
         cardsStorage,
-        cardsCount,
         allWeathers,
+        setCurrentClass 
     }
     
 

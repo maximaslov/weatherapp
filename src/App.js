@@ -27,7 +27,7 @@ const App = () => {
           <main>
             {data.serverError && <Error errorMessage={data.serverError} />}
             <WeatherCardsBlock />
-            <AddNewCardButton />
+            {/* <AddNewCardButton /> */}
             <WeatherForm 
             onClick={e => e.stopPropagation()}/>
             {data.shownResult && <Result />}
