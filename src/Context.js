@@ -97,18 +97,19 @@ const Context = (props) => {
     }
 
     const setCurrentClass = (res) => {
+        console.log(res.data.weather[0].main);
         switch (res.data.weather[0].main) {
-            // case 'Clouds': return brokenCloudsIcon;
+            case 'Clouds': return 'cloudsContainer';
             case 'Rain' || 'Drizzle': return 'rainContainer';
             case 'Snow': return 'snowContainer';
             // case 'Clear': return clearSkyIcon;
             // case 'Thunderstorm': return thunderstormIcon;
-            // case 'Mist' || 'Smoke' || 'Haze': return mistsIcon;
+            case 'Mist' || 'Smoke' || 'Haze': return 'mistContainer';
             // case 'Sand' || 'Dust' : return mistsIcon;
-            // case 'Ash' : return mistsIcon;
+            case 'Ash' : return 'mistContainer';
             // case 'Tornado' : return tornadoIcon;
             // case 'Squall' : return fewCloudsIcon;
-            default: return 'weatherCardContainer'; 
+            default: return 'weatherCardContainer';
          }
       }
 

@@ -5,8 +5,12 @@
     align-items: center;
 }
 
-.scaleSettings button {
+.button {
     min-width: 20px;
     padding: 3px 0;
     background-color: none;
+}
+
+.button:disabled {
+    background-color: black;
 }

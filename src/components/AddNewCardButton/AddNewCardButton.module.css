@@ -1,7 +1,7 @@
 .newCardBtnContainer {
     /* max-width: 200px; */
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     background-color: #f2668b4d;
     border-radius: 20px; 
     display: flex;
@@ -26,8 +26,8 @@
 
 .hiddenNewCardBtnContainer {
     /* max-width: 200px; */
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     background-color: #f2668b4d;
     border-radius: 20px; 
     display: flex;
@@ -68,10 +68,15 @@
 
 .newCardBtnContainer:hover {
     transition: transform 0.25ms ease;
+    cursor: default;
 }
 
-.newCardBtn:hover p{
-    transform: scale(1.5);
+.newCardBtn:hover p {
+    transform: scale(2);
+    cursor: default;
+}
+
+.newCardBtn:hover {
     cursor: default;
 }
 

@@ -52,11 +52,12 @@ const WeatherCard = ({ city, lang, scale, id }) => {
   return (
     <>
       <div className={showThisCard ? styles[currentClassname] : styles.remove}>
+      {currentClassname === 'snowContainer' && <Snowfall />}
         {!currentWeather || data.showLoader ? (
           <Loader />
         ) : (
-          <div className={styles.weatherCard}>
-
+          
+          <div className={styles.weatherCard}>  
             <p>{currentWeather.name}</p>
             <p>
               {currentWeather.main.temp > 0
