@@ -1,6 +1,17 @@
 .currentWeather {
     display: flex;
     justify-content: space-between;
-    max-width: 760px;
+    max-width: 950px;
     width: 100%;
+}
+
+@media (max-width: 1450px) {
+    .currentWeather {
+        max-width: 715px;
+    }
+}
+@media (max-width: 900px) {
+    .currentWeather {
+        max-width: 570px;
+    }
 }

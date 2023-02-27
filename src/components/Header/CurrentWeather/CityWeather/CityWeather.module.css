@@ -51,3 +51,9 @@ figure {
 .descriptionText {
     color: rgba(255, 255, 255, 0.698)
 }
+
+@media (max-width: 900px) {
+    .cityWeather:last-child {
+        display: none;
+    }
+}

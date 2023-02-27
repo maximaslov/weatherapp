@@ -14,6 +14,7 @@ const CurrentWeather = () => {
             <CityWeather city={data.isEnglishLanguage ? 'Kiev' : "Київ"}/>
             <CityWeather city={data.isEnglishLanguage ? 'London' : "Лондон"}/>
             <CityWeather city={data.isEnglishLanguage ? 'New York' : "Ню Йорк"}/>
+            <CityWeather city={data.isEnglishLanguage ? 'Berlin' : "Берлин"}/>
         </div>
     )
 }

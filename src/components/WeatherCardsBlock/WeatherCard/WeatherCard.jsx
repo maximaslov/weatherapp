@@ -19,7 +19,7 @@ const WeatherCard = ({ city, lang, scale, id }) => {
     setTimeout(() => {
       data.cardsStorage.setItem("storageCardsArray", JSON.stringify(newItems));
       data.setCards(JSON.parse(data.cardsStorage.getItem("storageCardsArray")));
-    }, 700);
+  }, 700);  
   };
 
   const getCurrentWeather = () => {
@@ -42,7 +42,8 @@ const WeatherCard = ({ city, lang, scale, id }) => {
     getCurrentWeather();
     const newStorageArr = JSON.stringify(data.cards);
     data.cardsStorage.setItem("storageCardsArray", newStorageArr);
-    // data.cardsStorage.clear();
+    data.cardsStorage.clear();
+    console.log(data.cardsStorage);
   }, [
     scale,
     lang,

@@ -1,6 +1,15 @@
 .settings {
     display: flex;
-    max-width: 240px;
+    max-width: 270px;
     width: 100%;
     justify-content: space-between;
+}
+
+@media (max-width: 1000px) {
+    .settings {
+        flex-direction: column;
+        height: 65px;
+        max-width: 135px;
+    }
+    
 }
