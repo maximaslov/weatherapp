@@ -6,7 +6,7 @@
   min-height: 250px;
   display: flex;
   align-items: center;
-  position: relative;
+  /* position: relative; */
   z-index: 10;
   transition: transform 0.25s ease;
   animation: show 0.7s ease;
@@ -20,7 +20,7 @@
   min-height: 250px;
   display: flex;
   align-items: center;
-  position: relative;
+  /* position: relative; */
   z-index: 10;
   transition: transform 0.25s ease;
   animation: hide 0.7s ease;

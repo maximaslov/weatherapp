@@ -1,6 +1,8 @@
 .scaleSettings {
-    width: 135px;
+    /* width: 134px; */
+    width: fit-content;
     margin: 0 auto;
+    text-align: center;
 }
 
 .scaleBtn {
@@ -20,5 +22,12 @@
 @media (max-width: 1000px){
     .scaleBtn {
         margin: 0 auto;
+    }
+}
+
+@media (max-width: 763px) {
+    .scaleSettings {
+        margin: 0;
+        width: fit-content;
     }
 }

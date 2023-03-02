@@ -1,4 +1,4 @@
-import  React, { useState, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 import standartBackground from '../src/img/background.jpg'
 import rainIcon from './img/shower-rain.png';
 import brokenCloudsIcon from './img/broken-clouds.png';
@@ -28,7 +28,7 @@ const Context = (props) => {
     const languageStorage = window.localStorage;
     const scaleStorage = window.localStorage;
     const cardsStorage = window.localStorage;
-    const allWeathers = [];
+    // const allWeathers = [];
     const [showForm, setShowForm] = useState(false);
     const [currentWeather, setCurrentWeather] = useState(null);
     const [background, setBackground] = useState(standartBackground);
@@ -49,9 +49,14 @@ const Context = (props) => {
     const lang = isEnglishLanguage ? 'en' : 'ua';
     const scale = currentScale === 'metric' ? 'C' : 'F';
 
-    const cardsData = cardsStorage.getItem('storageCardsArray');
-    const cardsArray = cardsData ? JSON.parse(cardsData) : [];
-    const [cards, setCards] = useState(cardsArray);
+    // const [lang, setLang] = useState(isEnglishLanguage ? 'en' : 'ua');
+    // const [scale, setScale] = useState(currentScale === 'metric' ? 'C' : 'F');
+    
+    // const [cards, setCards] = useState(cardsArray);
+    const [cards, setCards] = useState(() => {
+        const cardsData = cardsStorage.getItem('storageCardsArray');
+        return cardsData ? JSON.parse(cardsData) : [];
+    });
     
 
     const setCurrentBackground = (res) => {
@@ -165,14 +170,13 @@ const Context = (props) => {
         showAddButton,
         cards,
         setCards,
-        cardsData,
-        cardsArray,
+        // cardsData,
+        // cardsArray,
         cardsStorage,
-        allWeathers,
+        // allWeathers,
         setCurrentClass 
     }
     
-
     return <WeatherContext.Provider value={value}>{props.children}</WeatherContext.Provider>
 }
 

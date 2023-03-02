@@ -42,7 +42,7 @@ const WeatherCard = ({ city, lang, scale, id }) => {
     getCurrentWeather();
     const newStorageArr = JSON.stringify(data.cards);
     data.cardsStorage.setItem("storageCardsArray", newStorageArr);
-    data.cardsStorage.clear();
+    // data.cardsStorage.clear();
     console.log(data.cardsStorage);
   }, [
     scale,

@@ -9,6 +9,7 @@
     cursor: pointer;
     height: 30px;
     transition: transform 0.25s ease;
+    border: solid 0.5px rgba(255, 255, 255, 0.269);
 }
 
 .languageBtn:active {
@@ -23,4 +24,5 @@
     transform: none;
     box-shadow: none;
     cursor: auto;
+    border: none;
 }
