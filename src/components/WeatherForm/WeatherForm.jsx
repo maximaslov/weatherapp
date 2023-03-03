@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect, useState } from 'react';
 import styles from './WeatherForm.module.css';
 import { Formik, useFormik } from 'formik';
 import { weatherFormSchemaEnglish, weatherFormSchemaUkraine } from './weatherFormSchema';
@@ -7,6 +7,7 @@ import { WeatherApi } from '../../api';
 
 const WeatherForm = () => {
     const data = useContext(WeatherContext);
+    const [currentClassName, setCurrentClassName] = useState('weatherFormBox');
     const onClose = () => {
         data.setShowForm(false);
         data.setShowAddButton(true);
@@ -42,8 +43,13 @@ const WeatherForm = () => {
                         // const newCardsArray = [...data.cards, city]
                         const newCardsArray = [...data.cards, newCradInfo]
                         data.setCards(newCardsArray);
-                        data.setShowForm(false);
                         data.setShowAddButton(true);
+                        setCurrentClassName('hideWeatherFormBox');
+                        setTimeout(() => {
+                            data.setShowForm(false);
+                            setCurrentClassName('weatherFormBox');
+                        }, 700)
+                        
                     }
                 })
                 .catch(e => {
@@ -68,7 +74,7 @@ const WeatherForm = () => {
         className={data.showForm ? styles.weatherFormContaner : null}
         >
             {data.showForm &&
-            <div className={styles.weatherFormBox}>
+            <div className={styles[currentClassName]}>
                 <Formik>
                     <form className={styles.weatherForm} onSubmit={formik.handleSubmit}>
                         <div>

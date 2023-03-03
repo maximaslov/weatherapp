@@ -12,9 +12,10 @@ const WeatherCard = ({ city, lang, scale, id }) => {
   const [showThisCard, setShowThisCard] = useState(true);
   const [currentClassname, setCurrentClassName] = useState('weatherCardContainer');
 
-  const removeCard = (e) => {
-    const items = JSON.parse(data.cardsStorage.getItem("storageCardsArray"));
-    const newItems = items.filter((e) => e.id !== id);
+  const removeCard = () => {
+    // const items = JSON.parse(data.cardsStorage.getItem("storageCardsArray"));
+    // const items = data.cards;
+    const newItems = data.cards.filter(e => e.id !== id);
     setShowThisCard(false);
     setTimeout(() => {
       data.cardsStorage.setItem("storageCardsArray", JSON.stringify(newItems));
