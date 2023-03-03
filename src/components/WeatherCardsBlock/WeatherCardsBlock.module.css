@@ -8,3 +8,9 @@
     flex-wrap: wrap;
     width: 100vw;
 }
+
+@media(max-width: 870px) {
+    .weatherCardContainer {
+        justify-content: center;
+    }
+}
