@@ -4,9 +4,9 @@ import styles from './Header.module.css';
 import CurrentWeather from './CurrentWeather/CurrentWeather';
 import logo from '../../img/logo.png'
 
-const Header = () => {
+const Header = ({ isScrolled }) => {
     return (
-        <header className={styles.header}>
+        <header className={isScrolled ? styles.headerScrolled :styles.header}>
             <SettingsBlock/>
             <picture className={styles.logo}>
                 <img src={logo} alt="weather app" />

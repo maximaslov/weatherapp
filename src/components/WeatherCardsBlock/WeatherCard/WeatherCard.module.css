@@ -1,4 +1,5 @@
 .weatherCardContainer {
+  border-radius: 10px;
   /* background-color: white; */
   background-color: rgba(255, 255, 255, 0.42);
   border-radius: 10px;
@@ -97,6 +98,7 @@
 
 .rainContainer::before {
   pointer-events: none;
+  border-radius: 10px;
   content: "";
   position: absolute;
   top: 0;
@@ -113,6 +115,7 @@
 }
 
 .snowContainer::before {
+  border-radius: 10px;
   pointer-events: none;
   content: "";
   position: absolute;
@@ -127,6 +130,7 @@
 }
 
 .mistContainer::before {
+  border-radius: 10px;
   pointer-events: none;
   content: "";
   position: absolute;
@@ -143,6 +147,7 @@
 }
 
 .cloudsContainer::before {
+  border-radius: 10px;
   pointer-events: none;
   content: "";
   position: absolute;
