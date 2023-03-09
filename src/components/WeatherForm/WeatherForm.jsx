@@ -40,7 +40,6 @@ const WeatherForm = () => {
                             name: city, 
                             id: Math.random(),
                         }
-                        // const newCardsArray = [...data.cards, city]
                         const newCardsArray = [...data.cards, newCradInfo]
                         data.setCards(newCardsArray);
                         data.setShowAddButton(true);

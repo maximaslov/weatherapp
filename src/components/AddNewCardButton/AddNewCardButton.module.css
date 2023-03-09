@@ -1,16 +1,16 @@
 .newCardBtnContainer {
-    /* max-width: 200px; */
-    width: 250px;
-    height: 250px;
-    background-color: #f2668b4d;
-    border-radius: 20px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* position: absolute; */
-    z-index: 2;
-    animation: show 0.7s ease;
+       /* max-width: 200px; */
+       width: 250px;
+       height: 315px;
+       background-color: #f2668b4d;
+       border-radius: 10px;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       /* position: absolute; */
+       z-index: 2;
+       animation: show 0.7s ease;
 }
 
 @keyframes show {
@@ -27,9 +27,9 @@
 .hiddenNewCardBtnContainer {
     /* max-width: 200px; */
     width: 250px;
-    height: 250px;
+    height: 315px;
     background-color: #f2668b4d;
-    border-radius: 20px; 
+    border-radius: 10px; 
     display: flex;
     flex-direction: column;
     justify-content: center;

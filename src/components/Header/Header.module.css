@@ -59,7 +59,7 @@
     width: 100%;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
     .logo {
         display: none;
     }
